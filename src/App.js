@@ -1,38 +1,44 @@
+// Importa o módulo 'api' do diretório atual
 import api from "./api";
-import { useState } from "react";
-import "./html-css-template/css/style.css";
-import "./html-css-template/css/reset.css";
+// Importa o componente 'Musicas' do diretório atual
 import Musicas from "./Musicas";
+// Importa o hook 'useState' da biblioteca React
+import { useState } from "react";
+// Importa estilos CSS do arquivo 'style.css' no diretório './html-css-template/css/'
+import "./html-css-template/css/style.css";
+// Importa estilos CSS do arquivo 'reset.css' no diretório './html-css-template/css/'
+import "./html-css-template/css/reset.css";
 
+// Definição do componente 'App'
 function App() {
-  const [getMusicas, setMusicas] = useState([]);
-  // criando state com valor de um vetor vazio;
+  // Define um estado 'musicas' usando o hook 'useState'
+  const [musicas, setMusicas] = useState([]);
+
+  // Função 'listar' para obter dados da 'api' e atualizar o estado 'musicas'
   function listar() {
+    // Faz uma chamada à API usando o método 'get'
     api
       .get()
+      // Se a chamada for bem-sucedida, atualiza o estado 'musicas' com os dados obtidos
       .then((respostaObtida) => {
-        // cairá aqui se a requisição for realizada;
-        console.log(respostaObtida);
-        // objeto que representa a resposta enviada pela API;
-        console.log(respostaObtida.status);
-        // vendo status da resposta (OK - 200);
-        console.log(respostaObtida.data);
-        // vendo os dados da resposta (data: []);
-        setMusicas(respostaObtida.data);
-        // setando "musicas" com os mesmos dados recebidos pela resposta da
-        // requisição;
+        console.log(respostaObtida.data); // Exibe os dados no console
+        setMusicas(respostaObtida.data); // Atualiza o estado 'musicas' com os dados da resposta
       })
+      // Se houver um erro na chamada à API, exibe o erro no console
       .catch((erroOcorrido) => {
-        // cairá aqui se houver algum erro durante a
-        // requisição;
         console.log(erroOcorrido);
       });
   }
 
+  // Retorna um componente React
   return (
+    // Fragmento vazio do React, que permite retornar vários elementos adjacentes
     <>
+      {/* Renderiza o componente 'Musicas' */}
       <Musicas />
     </>
   );
 }
+
+// Exporta o componente 'App' para ser utilizado em outros lugares da aplicação
 export default App;
