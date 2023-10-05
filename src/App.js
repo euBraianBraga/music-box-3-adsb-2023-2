@@ -1,7 +1,8 @@
 import api from "./api";
 import { useState } from "react";
-
-import "./style.css";
+import "./html-css-template/css/style.css";
+import "./html-css-template/css/reset.css";
+import Musicas from "./Musicas";
 
 function App() {
   const [getMusicas, setMusicas] = useState([]);
@@ -30,16 +31,7 @@ function App() {
 
   return (
     <>
-      <h1>Titulo</h1>
-      <button onClick={listar}>Listar</button>
-
-      {getMusicas.map((musica) => (
-        <div key={musica.id} style={{ color: "red", background: "black" }}>
-          <h1>{musica.nome}</h1>
-          <h1>{musica.artista}</h1>
-          <br />
-        </div>
-      ))}
+      <Musicas />
     </>
   );
 }
